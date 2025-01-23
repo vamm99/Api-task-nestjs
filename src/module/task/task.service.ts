@@ -21,11 +21,12 @@ export class TaskService extends Service {
    * @returns Task
    */
   async create(createTaskDto: CreateTaskDto): Promise<Task> {
+    const { title, description, completed } = createTaskDto;
     const task = await this.prisma.task.create({
       data: {
-        title: createTaskDto.title,
-        description: createTaskDto.description,
-        completed: createTaskDto.completed,
+        title,
+        description,
+        completed,
       },
     });
     if (!task) {
@@ -57,6 +58,7 @@ export class TaskService extends Service {
    * @returns Task
    */
   async update(id: number, updateTaskDto: UpdateTaskDto): Promise<Task> {
+    const { completed, description, title } = updateTaskDto;
     const taskFound = await this.getTaskById(id);
     if (!taskFound) {
       this.logger.error(`Error updating task with id ${id} - Task not found`);
@@ -68,9 +70,9 @@ export class TaskService extends Service {
         id: id,
       },
       data: {
-        title: updateTaskDto.title,
-        description: updateTaskDto.description,
-        completed: updateTaskDto.completed,
+        title,
+        description,
+        completed,
       },
     });
 

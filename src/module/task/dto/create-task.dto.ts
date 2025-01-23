@@ -1,4 +1,5 @@
-import { IsBoolean, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
+import { status } from '@prisma/client';
 export class CreateTaskDto {
   @IsString()
   title: string;
@@ -6,6 +7,5 @@ export class CreateTaskDto {
   @IsString()
   description: string;
 
-  @IsBoolean()
-  completed: boolean;
+  completed: status;
 }
