@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { LoggerConfiguredModule } from './lib/Logger';
 import { ConfigModule } from '@nestjs/config';
 import { TaskModule } from './module/task/task.module';
+import { ResponseMessageInterceptor } from './lib/ResponseInterceptor';
 
 @Module({
   imports: [
@@ -13,6 +14,6 @@ import { TaskModule } from './module/task/task.module';
     TaskModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [ResponseMessageInterceptor],
 })
 export class AppModule {}
